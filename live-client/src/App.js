@@ -2,13 +2,13 @@ import "./App.css";
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Components
-import Login from "./components/Login";
-import Home from "./components/Home";
-import Register from "./components/Register";
-import Ad from "./components/Ad";
-import AdForm from "./components/AdForm";
-import Nav from "./components/Nav";
-import Dashboard from "./components/Dashboard";
+import Login from "./components/auth/Login.jsx";
+import Home from "./components/Home.jsx";
+import Register from "./components/auth/Register.jsx";
+import Ad from "./components/item/Ad.jsx";
+import AdForm from "./components/item/AdForm.jsx";
+import Nav from "./components/config/Nav.jsx";
+import Dashboard from "./components/Dashboard/Dashboard.jsx";
 // Actions
 import { loadUser } from "./actions/auth";
 // Redux
