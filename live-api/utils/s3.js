@@ -1,38 +1,27 @@
-const cloudinary = require("cloudinary").v2;
-const axios = require("axios");
+const S3 = require("aws-sdk/clients/s3");
 const fs = require("fs");
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const express = require("express");
+const router = express.Router();
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 
-// Upload file to Cloudinary
-exports.uploadFile = (file) => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: "my_folder",
-        public_id: file.filename,
-        resource_type: "raw",
-      },
+router.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    const response = await cloudinary.uploader.upload_stream(
+      { resource_type: "auto" },
       (error, result) => {
         if (error) {
-          reject(error);
+          res.status(500).json({ error });
         } else {
-          resolve(result);
+          res.status(200).json(result);
         }
       }
     );
-    const readStream = fs.createReadStream(file.path);
-    readStream.pipe(uploadStream);
-  });
-};
+    req.file.stream.pipe(response);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
-// Get file from Cloudinary
-exports.getFileStream = async (public_id) => {
-  const url = cloudinary.url(public_id, { resource_type: "raw" });
-  const response = await axios.get(url, { responseType: "stream" });
-  return response.data;
-};
+module.exports = router;
