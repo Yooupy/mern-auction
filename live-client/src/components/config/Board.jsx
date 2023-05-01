@@ -56,7 +56,7 @@ const Board = (props) => {
         props.clearAlerts();
       };
     }
-  }, []);
+  }, [props]);
 
   // Check if user is logged
   if (!props.isAuth) {
