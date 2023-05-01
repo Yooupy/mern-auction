@@ -38,6 +38,7 @@ const AdForm = (props) => {
     image: "",
   });
   const [file, setFile] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [fileName, setFileName] = useState("Choose your image file...");
   const [fileValid, setFileValid] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -47,7 +48,7 @@ const AdForm = (props) => {
     return () => {
       props.clearAlerts();
     };
-  }, []);
+  }, [props]);
 
   const handleFormChange = (e) => {
     e.preventDefault();
