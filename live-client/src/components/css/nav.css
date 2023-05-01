@@ -10,7 +10,7 @@
   align-items: center;
   position: sticky;
   top: 0;
-  background-color: #ffffff;
+  background-color: #1a73e8; /* Update the background-color to blue */
   width: 100%;
   z-index: 100;
   box-shadow: 0 0 7px 0px #cecece;
@@ -34,6 +34,12 @@
 }
 .nav__buttons > Button {
   margin: 0 5px;
+  background-color: #1a73e8; /* Update the Button background-color to blue */
+  color: #ffffff; /* Update the Button text color to white */
+}
+
+.nav__buttons > Button:hover {
+  background-color: #176fce; /* Update the Button hover background-color to a darker shade of blue */
 }
 
 .nav__search {

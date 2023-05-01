@@ -32,13 +32,13 @@ const Dashboard = (props) => {
     if (props.isAuth) {
       props.getUserPurchasedAds();
     }
-  }, [props.loading]);
+  }, [props, props.loading]);
 
   useEffect(() => {
     return () => {
       props.clearAlerts();
     };
-  }, []);
+  }, [props]);
 
   // Check if user is logged
   if (!props.isAuth) {
